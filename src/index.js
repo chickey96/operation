@@ -1,7 +1,6 @@
-import _ from 'lodash';
+
 import table from './table';
 import instruments from './instruments';
-import Game from './game';
 import SetUp from './setup';
 
 
@@ -19,6 +18,5 @@ document.addEventListener("DOMContentLoaded", () => {
   canvas.height = 600;
   var context = canvas.getContext("2d");
 
-  const game = new Game();
-  new SetUp(game, context);
+  new SetUp(context);
 });

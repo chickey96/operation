@@ -6,15 +6,17 @@ import Colon from './organs/colon';
 import Kidneys from './organs/kidneys';
 import Liver from './organs/liver'
 import Body from './body';
+import Game from './game';
 
-export default class SetUp {
-  constructor(game, context){
+class SetUp {
+  constructor(context){
     this.context = context;
-    this.game = game;
     this.organs = [];
     this.addOrgans();
     this.drawOrgans();
     new Body().draw(context);
+    this.game = new Game(this.organs, this.context);
+    this.repaint = this.repaint.bind(this)
   }
 
   addOrgans(){
@@ -33,5 +35,12 @@ export default class SetUp {
    })
   }
 
+  repaint(){
+    let canvas = document.getElementById('canvas')
+    this.context.clearRect(0, 0, canvas.width , canvas.height );
+    this.addOrgans();
+    this.drawOrgans();
+    new Body().draw(this.context);
+  }
 }
-
+ export default SetUp;
