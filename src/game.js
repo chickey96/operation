@@ -23,7 +23,6 @@ class Game{
         {
           this.selection = organ;
           this.dragging = true;
-          this.redrawn = false;
           return;
         } 
       })
