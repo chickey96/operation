@@ -1,27 +1,24 @@
 const Organ = require('./organ');
 
 export default class Stomach extends Organ {
-  constructor() {
-    super()
+ 
+  constructor(context) {
+    let imgUrl = "https://upload.wikimedia.org/wikipedia/commons/b/be/Stomach_icon.svg"
+    let organSpecs = { ctx: context, imgUrl: imgUrl, x: 615, y: 400, w: 45, h: 55 }
+    super(organSpecs)
     if (!this.x) {
       this.x = 615;
     }
     if (!this.y) {
       this.y = 400;
     }
+    this.ctx = context;
     this.width = 45;
     this.height = 55;
   }
 
-  draw(ctx) {
-    let options = {};
-    options.ctx = ctx;
-    options.imgUrl = "https://upload.wikimedia.org/wikipedia/commons/b/be/Stomach_icon.svg"
-    options.x = this.x;
-    options.y = this.y;
-    options.width = this.width;
-    options.height = this.height;
-    Organ.prototype.draw(options);
+  draw() {
+    super.draw();
   }
   xPos() {
     return this.x;

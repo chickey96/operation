@@ -1,11 +1,15 @@
 
 export default class Body {
 
-  draw(ctx) {
-    let body = new Image();
-    body.src = "http://chittagongit.com//images/human-body-icon/human-body-icon-1.jpg"
-    body.onload = function () {
-      ctx.drawImage(body, 185, 25, 275, 550)
+  constructor(ctx) {
+    this.ctx = ctx;
+    this.body = new Image();
+    this.body.src = "http://chittagongit.com//images/human-body-icon/human-body-icon-1.jpg"
+    this.body.onload = () => {
+      this.ctx.drawImage(this.body, 185, 25, 275, 550)
     }
+  }
+  draw() {
+    this.ctx.drawImage(this.body, 185, 25, 275, 550)
   }
 }

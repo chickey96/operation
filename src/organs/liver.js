@@ -1,27 +1,24 @@
 const Organ = require('./organ');
 
 export default class Liver extends Organ {
-  constructor() {
-    super()
+  
+  constructor(context) {
+    let imgUrl = "https://openclipart.org/download/37315/liver.svg"
+    let organSpecs = { ctx: context, imgUrl: imgUrl, x: 500, y: 100, w: 35, h: 45 }
+    super(organSpecs)
     if (!this.x) {
       this.x = 500;
     }
     if (!this.y) {
       this.y = 100;
     }
+    this.ctx = context;
     this.width = 35;
     this.height = 45;
   }
 
-  draw(ctx) {
-    let options = {};
-    options.ctx = ctx;
-    options.imgUrl = "https://openclipart.org/download/37315/liver.svg"
-    options.x = this.x;
-    options.y = this.y;
-    options.width = this.width;
-    options.height = this.height;
-    Organ.prototype.draw(options);
+  draw() {
+    super.draw();
   }
 
   xPos() {

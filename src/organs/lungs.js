@@ -1,27 +1,24 @@
 import Organ from './organ';
 
 export default class Lungs extends Organ {
-  constructor() {
-    super()
+  
+  constructor(context) {
+    let imgUrl = "https://openclipart.org/download/298630/lungs--publicdomainvectors-image.svg"
+    let organSpecs = { ctx: context, imgUrl: imgUrl, x: 600, y: 250, w: 65, h: 70 }
+    super(organSpecs)
     if (!this.x) {
       this.x = 600;
     }
     if (!this.y) {
       this.y = 250;
     }
+    this.ctx = context;
     this.width = 65;
     this.height = 70;
   }
 
-  draw(ctx) {
-    let options = {};
-    options.ctx = ctx;
-    options.imgUrl = "https://openclipart.org/download/298630/lungs--publicdomainvectors-image.svg"
-    options.x = this.x;
-    options.y = this.y;
-    options.width = this.width;
-    options.height = this.height;
-    Organ.prototype.draw(options);
+  draw() {
+    super.draw();
   }
 
   xPos() {

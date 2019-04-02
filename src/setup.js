@@ -14,24 +14,25 @@ class SetUp {
     this.organs = [];
     this.addOrgans();
     this.drawOrgans();
-    new Body().draw(context);
-    this.game = new Game(this.organs, this.context);
+    let body = new Body(context);
+    body.draw();
+    this.game = new Game(this.organs, this.context, body);
     this.repaint = this.repaint.bind(this)
   }
 
   addOrgans(){
-    this.organs.push(new Heart);
-    this.organs.push(new Lungs);
-    this.organs.push(new Stomach);
-    this.organs.push(new SmallIntestine);
-    this.organs.push(new Colon);
-    this.organs.push(new Kidneys);
-    this.organs.push(new Liver);
+    this.organs.push(new Heart(this.context));
+    this.organs.push(new Lungs(this.context));
+    this.organs.push(new Stomach(this.context));
+    this.organs.push(new SmallIntestine(this.context));
+    this.organs.push(new Colon(this.context));
+    this.organs.push(new Kidneys(this.context));
+    this.organs.push(new Liver(this.context));
   }
 
   drawOrgans(){
    this.organs.forEach( organ => {
-     organ.draw(this.context);
+     organ.draw();
    })
   }
 

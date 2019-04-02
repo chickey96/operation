@@ -1,13 +1,14 @@
 
-import Body from './body';
+
 class Game{
-  constructor(organs, ctx) {
+  constructor(organs, ctx, body) {
     this.organs = organs;
     this.dragging = false;
     this.changeInX = 0;
     this.changeInY = 0;
     this.selection = null;
     this.ctx = ctx;
+    this.body = body;
     
     let canvas = document.getElementById('canvas');
     canvas.addEventListener('mousedown', mouseDown.bind(this));
@@ -37,10 +38,12 @@ class Game{
         this.selection.setX(this.selection.x + this.changeInX);
         this.selection.setY(this.selection.y + this.changeInY);
         let canvas = document.getElementById('canvas');
-        this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-        new Body().draw(this.ctx);
-        this.organs.forEach(organ => {
-          organ.draw(this.ctx);
+        requestAnimationFrame(() => {
+          this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+          this.body.draw(this.ctx);
+          this.organs.forEach(organ => {
+            organ.draw(this.ctx);
+          })
         })
       }
     } 
