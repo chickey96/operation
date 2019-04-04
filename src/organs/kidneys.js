@@ -20,26 +20,12 @@ export default class Kidneys extends Organ {
     super.draw();
   }
 
-  xPos() {
-    return this.x;
-  }
-
-  yPos() {
-    return this.y;
-  }
   setX(newX) {
     this.x = newX;
   }
 
   setY(newY) {
     this.y = newY;
-  }
-  width() {
-    return this.width;
-  }
-
-  height() {
-    return this.height;
   }
   
 } 

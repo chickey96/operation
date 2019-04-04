@@ -7,6 +7,7 @@ import Kidneys from './organs/kidneys';
 import Liver from './organs/liver'
 import Body from './body';
 import Game from './game';
+import Gameplay from './gameplay';
 
 class SetUp {
   constructor(context){
@@ -21,13 +22,13 @@ class SetUp {
   }
 
   addOrgans(){
-    this.organs.push(new Heart(this.context));
-    this.organs.push(new Lungs(this.context));
+    this.organs.push(new Kidneys(this.context));
     this.organs.push(new Stomach(this.context));
     this.organs.push(new SmallIntestine(this.context));
     this.organs.push(new Colon(this.context));
-    this.organs.push(new Kidneys(this.context));
     this.organs.push(new Liver(this.context));
+    this.organs.push(new Lungs(this.context));
+    this.organs.push(new Heart(this.context));
   }
 
   drawOrgans(){
@@ -42,6 +43,11 @@ class SetUp {
     this.addOrgans();
     this.drawOrgans();
     new Body().draw(this.context);
+  }
+
+  startGame(){
+    const gameplay = new Gameplay(this.context, this.organs);
+    window.setInterval(gameplay.playRound, 9000)
   }
 }
  export default SetUp;

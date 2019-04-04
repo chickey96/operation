@@ -9,6 +9,8 @@ class Game{
     this.selection = null;
     this.ctx = ctx;
     this.body = body;
+    this.offsetX = 0;
+    this.offsetY = 0;
     
     let canvas = document.getElementById('canvas');
     canvas.addEventListener('mousedown', mouseDown.bind(this));
@@ -24,6 +26,8 @@ class Game{
         {
           this.selection = organ;
           this.dragging = true;
+          this.offsetX = mouseX - organ.x;
+          this.offsetY = mouseY - organ.y;
           return;
         } 
       })
@@ -33,8 +37,8 @@ class Game{
       let mouseX = e.layerX;
       let mouseY = e.layerY;
       if(this.dragging){
-        this.changeInX = mouseX - this.selection.x;
-        this.changeInY = mouseY - this.selection.y;
+        this.changeInX = mouseX - this.selection.x - this.offsetX;
+        this.changeInY = mouseY - this.selection.y - this.offsetY;
         this.selection.setX(this.selection.x + this.changeInX);
         this.selection.setY(this.selection.y + this.changeInY);
         let canvas = document.getElementById('canvas');
@@ -46,12 +50,28 @@ class Game{
           })
         })
       }
+      else {
+        let hover = false;
+        for (let i = 0; i < this.organs.length; i++) {
+          let organ = this.organs[i];
+          if (mouseX >= organ.x && mouseX <= (organ.x + organ.width)
+            && mouseY >= organ.y && mouseY <= (organ.y + organ.height)) {
+            canvas.className = "hover"
+            hover = true;
+            break;
+          }
+        }
+        if(!hover){
+          canvas.className = "default";
+        }
+      }
     } 
 
     function mouseUp (e) {
       this.dragging = false;
     }
   } 
+
 }
 
 export default Game;

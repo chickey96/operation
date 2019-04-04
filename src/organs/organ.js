@@ -12,21 +12,6 @@ class Organ {
     this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
   }
 
-  xPos(){
-    return;
-  }
-
-  yPos(){
-    return;
-  }
-
-  width(){
-    return;
-  }
-
-  height(){
-    return;
-  }
 }
 
 module.exports = Organ;

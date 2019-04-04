@@ -3,7 +3,6 @@ import table from './table';
 import instruments from './instruments';
 import SetUp from './setup';
 
-
 function component() {
   let element = document.createElement('div');
   element.className = "operating-room"
@@ -17,6 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
   canvas.width = 900;
   canvas.height = 600;
   var context = canvas.getContext("2d");
-
-  new SetUp(context);
+  const setup = new SetUp(context);
+  document.body.onload = () => {
+    setup.startGame();
+  }
 });
+
+

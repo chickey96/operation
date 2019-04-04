@@ -20,26 +20,13 @@ export default class Stomach extends Organ {
   draw() {
     super.draw();
   }
-  xPos() {
-    return this.x;
-  }
-
-  yPos() {
-    return this.y;
-  }
+  
   setX(newX) {
     this.x = newX;
   }
 
   setY(newY) {
     this.y = newY;
-  }
-  width() {
-    return this.width;
-  }
-
-  height() {
-    return this.height;
   }
 
 }
