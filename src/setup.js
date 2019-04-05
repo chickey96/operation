@@ -7,7 +7,7 @@ import Kidneys from './organs/kidneys';
 import Liver from './organs/liver'
 import Body from './body';
 import Game from './game';
-import Gameplay from './gameplay';
+
 
 class SetUp {
   constructor(context){
@@ -42,12 +42,8 @@ class SetUp {
     this.context.clearRect(0, 0, canvas.width , canvas.height );
     this.addOrgans();
     this.drawOrgans();
-    new Body().draw(this.context);
+    new Body().draw();
   }
-
-  startGame(){
-    const gameplay = new Gameplay(this.context, this.organs);
-    window.setInterval(gameplay.playRound, 9000)
-  }
+    
 }
  export default SetUp;

@@ -16,10 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   canvas.width = 900;
   canvas.height = 600;
   var context = canvas.getContext("2d");
-  const setup = new SetUp(context);
-  document.body.onload = () => {
-    setup.startGame();
-  }
+  new SetUp(context);
 });
 
 

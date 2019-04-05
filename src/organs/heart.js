@@ -29,4 +29,8 @@ export default class Heart extends Organ {
     this.y = newY;
   }
 
+  // lock(){
+  //   super()
+  // }
+
 }

@@ -6,10 +6,15 @@ class Organ {
     this.img.onload = () => {
       ctx.drawImage(this.img, x, y, w, h)
     }
+    this.placed = false;
   }
   
   draw(){ 
     this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+  }
+
+  lock(){
+    this.placed = true;
   }
 
 }
