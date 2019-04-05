@@ -23,6 +23,30 @@ class Gameplay {
     this.situateOrgan = this.situateOrgan.bind(this);
     this.correctPlace = this.correctPlace.bind(this);
     this.isPositioned = this.isPositioned.bind(this);
+    this.setUpHealth = this.setUpHealth.bind(this);
+    this.incrementHealth = this.incrementHealth.bind(this);
+    this.organsPlaced = 0;
+    this.setUpHealth();
+  }
+
+  setUpHealth(){
+    this.screen = document.createElement('div');
+    this.screen.className = 'screen';
+    this.screen.innerText = "HEALTH";
+    this.health = document.createElement('div');
+    this.health.className = "health";
+    this.screen.appendChild(this.health);
+    document.body.appendChild(this.screen);
+    for(let i = 1; i < 8; i++){
+      let bar = document.createElement('div')
+      bar.id = `bar${i}`;
+      this.health.appendChild(bar);
+    }
+  }
+
+  incrementHealth(){
+    let currBar = document.getElementById(`bar${this.organsPlaced}`);
+    currBar.style.backgroundColor = "lawngreen";
   }
 
   correctPlace(organ){
@@ -30,6 +54,8 @@ class Gameplay {
       if(this.isPositioned(organ, organName)){
         this.situateOrgan(organ, organName);
         organ.lock();
+        this.organsPlaced += 1;
+        this.incrementHealth();
         return true;
       }
       return false;
