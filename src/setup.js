@@ -18,6 +18,7 @@ class SetUp {
     let body = new Body(context);
     body.draw();
     this.game = new Game(this.organs, this.context, body);
+    this.game.play();
     this.repaint = this.repaint.bind(this)
   }
 

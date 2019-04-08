@@ -61,6 +61,7 @@ body {
   font-size: 18px;
   text-align: center;
   padding: 15px;
+  border: 1px solid lawngreen;
 }
 
 .close-modal {
@@ -74,11 +75,11 @@ body {
   background-color: black;
   height: 60px;
   width: 205px;
-  left: 85px;
-  top: 370;
+  left: 25px;
+  top: 25px;
   color: lawngreen;
   text-align: center;
-  padding: 25px 0;
+  padding: 30px;
   font-size: 24px;
 }
 
@@ -96,4 +97,31 @@ body {
 .health div {
   height: 100%;
   width: 14.28%;
+}
+
+.gameover {
+  visibility: visible;
+  z-index: 12;
+  width: 250px;
+  position: absolute;
+  top: 75;
+  background-color: black;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  padding: 15px;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.replay {
+  height: 25px;
+  width: 65px;
+  background-color: black;
+  color: white;
+  border: 1px solid lawngreen;
+  margin: 20px;
 }
