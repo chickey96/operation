@@ -122,6 +122,12 @@ body {
   width: 65px;
   background-color: black;
   color: white;
-  border: 1px solid lawngreen;
+  border: 1px solid white;
   margin: 20px;
+  outline: none;
+}
+
+.replay:hover {
+  color: lawngreen;
+  border-color: lawngreen;
 }

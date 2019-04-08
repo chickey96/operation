@@ -118,7 +118,7 @@ class Game{
         return false;
       }
     }
-    window.clearInterval();
+    window.clearInterval(this.won);
     this.canvas.removeEventListener('mousedown', this.mouseDown);
     this.canvas.removeEventListener('mousemove', this.mouseMove);
     this.canvas.removeEventListener('mouseup', this.mouseUp);
