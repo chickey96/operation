@@ -133,7 +133,7 @@ class Game{
   openModal(organName){
     this.modal.innerText = `You got the ${organName}!`
     this.modal.className = "open-modal";
-    window.setTimeout(this.closeModal, 2000)
+    window.setTimeout(this.closeModal, 1600)
   }
 
   closeModal(){
