@@ -53,12 +53,15 @@ class Gameplay {
   }
 
   startTimer(){
-    let time = 30;
-    let clock = setInterval(function(){
+    let time = 45;
+    let that = this;
+    this.clock = setInterval(() => {
       document.getElementById('timer').innerHTML='00:'+ time;
       time--;
       if (time < 0) {
-        clearInterval(clock);
+        clearInterval(that.clock);
+        that.game.endGame();
+        that.game.gameLostMessage();
       }
     }, 1000);
     this.game.startGame();
@@ -67,7 +70,7 @@ class Gameplay {
   setUpProgress(){
     this.progressScreen = document.createElement('div');
     this.progressScreen.className = 'screen';
-    this.progressScreen.innerText = "Progress";
+    this.progressScreen.innerText = "Implant Progress";
     this.progress = document.createElement('div');
     this.progress.className = "tracker";
     this.progressScreen.appendChild(this.progress);
@@ -82,7 +85,7 @@ class Gameplay {
   setUpHealth(){
     this.healthScreen = document.createElement('div');
     this.healthScreen.className = 'screen';
-    this.healthScreen.innerText = "Patient Condition";
+    this.healthScreen.innerText = "Patient Stability";
     this.health = document.createElement('div');
     this.health.className = "tracker";
     this.healthScreen.appendChild(this.health);
@@ -98,11 +101,6 @@ class Gameplay {
   incrementProgress(){
     let currBar = document.getElementById(`bar${this.organsPlaced}`);
     currBar.style.backgroundColor = "lawngreen";
-    // if(this.lives < 7){
-    //   this.lives += 1;
-    //   let currLife = document.getElementById(`life${this.lives}`);
-    //   currLife.style.backgroundColor = "lawngreen";
-    // }
   }
 
   correctPlace(organ){

@@ -13,13 +13,15 @@ class Game{
     this.offsetX = 0;
     this.offsetY = 0;
 
-    this.gameoverMessage = this.gameoverMessage.bind(this);
+    this.gameWonMessage = this.gameWonMessage.bind(this);
+    this.gameLostMessage = this.gameLostMessage.bind(this);
     this.restartGame = this.restartGame.bind(this);
     this.won = this.won.bind(this);
     this.mouseMove = this.mouseMove.bind(this);
     this.mouseUp = this.mouseUp.bind(this);
     this.mouseDown = this.mouseDown.bind(this);
     this.startGame = this.startGame.bind(this);
+    this.endGame = this.endGame.bind(this);
 
     this.playGame = new Gameplay(this);
     this.modal = document.createElement('span');
@@ -29,6 +31,9 @@ class Game{
     document.body.appendChild(this.gameover);
     this.gameover.className = "close-modal";
     this.closeModal();
+    this.modalBackground = document.createElement('div');
+    this.modalBackground.className = "close-modal";
+    document.body.appendChild(this.modalBackground);
 
     this.canvas = document.getElementById('canvas');
   } 
@@ -104,28 +109,41 @@ class Game{
 
   restartGame(e){
     e.preventDefault();
-    const screen = document.getElementsByClassName("screen");
-    document.body.removeChild(screen[0]);
+    const score = document.getElementsByClassName("score");
+    const OR = document.getElementsByClassName('operating-room')[0]
+    OR.removeChild(score[0]);
+    const rules = document.getElementsByClassName('instructions')[0]
+    document.body.removeChild(rules);
     document.body.removeChild(this.gameover);
     document.body.removeChild(this.modal);
+    document.body.removeChild(this.modalBackground);
     new SetUp(this.ctx);
   }
 
   play(){
-    window.setInterval(this.won, 1000);
+    this.intervalID = window.setInterval(this.won, 1000);
   }
 
   won() {
+    if(this.playGame.lives === 0){
+      this.endGame();
+      this.gameLostMessage();
+    }
     for (let i = 0; i < this.organs.length; i++) {
       if(!this.organs[i].placed){
         return false;
       }
     }
-    window.clearInterval(this.won);
+    this.endGame();
+    this.gameWonMessage();
+  }
+
+  endGame(){
+    window.clearInterval(this.intervalID);
+    window.clearInterval(this.playGame.clock)
     this.canvas.removeEventListener('mousedown', this.mouseDown);
     this.canvas.removeEventListener('mousemove', this.mouseMove);
     this.canvas.removeEventListener('mouseup', this.mouseUp);
-    this.gameoverMessage();
   }
 
   feedback(organ){
@@ -143,14 +161,34 @@ class Game{
     this.modal.className = "close-modal";
   }
 
-  gameoverMessage(){
-    this.gameover.innerText = "Congratulations! You Saved a life. Would you like to play again?";
-    this.replay = document.createElement('button');
-    this.replay.className = "replay";
-    this.replay.innerText = "Replay";
-    this.replay.onclick = this.restartGame;
-    this.gameover.appendChild(this.replay);
+  gameWonMessage(){
+    const msg = document.createElement('div');
+    msg.innerText = "Congratulations! You Saved a life.";
+    msg.className = 'msg';
+    this.gameover.appendChild(msg);
+    const replay = document.createElement('button');
+    replay.className = "replay";
+    replay.innerText = "Play Again";
+    replay.onclick = this.restartGame;
+    this.gameover.appendChild(replay);
+    this.gameover.id = 'game-won';
     this.gameover.className = "gameover";
+    this.modalBackground.className = "modal-background"
+  }
+
+  gameLostMessage(){
+    const msg = document.createElement('div');
+    msg.innerText = "You lost the patient!";;
+    msg.className = 'msg';
+    this.gameover.appendChild(msg);
+    const replay = document.createElement('button');
+    replay.className = "replay";
+    replay.innerText = "Try Again";
+    replay.onclick = this.restartGame;
+    this.gameover.appendChild(replay);
+    this.gameover.id = 'game-lost';
+    this.gameover.className = "gameover";
+    this.modalBackground.className = "modal-background"
   }
 
   repaint() {
