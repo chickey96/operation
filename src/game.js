@@ -13,15 +13,15 @@ class Game{
     this.offsetX = 0;
     this.offsetY = 0;
 
-    this.play = this.play.bind(this);
     this.gameoverMessage = this.gameoverMessage.bind(this);
     this.restartGame = this.restartGame.bind(this);
     this.won = this.won.bind(this);
     this.mouseMove = this.mouseMove.bind(this);
     this.mouseUp = this.mouseUp.bind(this);
     this.mouseDown = this.mouseDown.bind(this);
+    this.startGame = this.startGame.bind(this);
 
-    this.playGame = new Gameplay();
+    this.playGame = new Gameplay(this);
     this.modal = document.createElement('span');
     document.body.appendChild(this.modal);
     this.closeModal = this.closeModal.bind(this);
@@ -31,10 +31,13 @@ class Game{
     this.closeModal();
 
     this.canvas = document.getElementById('canvas');
+  } 
+
+  startGame(){
     this.canvas.addEventListener('mousedown', this.mouseDown);
     this.canvas.addEventListener('mousemove', this.mouseMove);
     this.canvas.addEventListener('mouseup', this.mouseUp);
-  } 
+  }
 
   mouseDown(e) {
     let mouseX = e.layerX;
@@ -133,7 +136,7 @@ class Game{
   openModal(organName){
     this.modal.innerText = `You got the ${organName}!`
     this.modal.className = "open-modal";
-    window.setTimeout(this.closeModal, 1000)
+    window.setTimeout(this.closeModal, 1200)
   }
 
   closeModal(){

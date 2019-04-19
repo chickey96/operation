@@ -1,6 +1,7 @@
 
 class Gameplay {
-  constructor(){
+  constructor(game){
+    this.game = game;
     this.closeEnough = {
       "Kidneys": { x: [270, 285], y: [190, 210] }, 
       "Stomach": { x: [301, 321], y: [170, 190] }, 
@@ -25,22 +26,50 @@ class Gameplay {
     this.isPositioned = this.isPositioned.bind(this);
     this.setUpProgress = this.setUpProgress.bind(this);
     this.setUpHealth = this.setUpHealth.bind(this);
+    this.startTimer = this.startTimer.bind(this);
+    this.setupTimer = this.setupTimer.bind(this);
     this.incrementProgress = this.incrementProgress.bind(this);
     this.organsPlaced = 0;
+    this.lives = 7;
     const OR = document.getElementsByClassName('operating-room')[0];
     const score = document.createElement('div');
     score.className = 'score';
     score.appendChild(this.setUpProgress());
     score.appendChild(this.setUpHealth());
+    score.appendChild(this.setupTimer());
     OR.append(score);
+  }
+
+  setupTimer() {
+    this.timerScreen = document.createElement('div');
+    this.timerScreen.className = 'screen';
+    this.timerScreen.id = 'timer'
+    let startButton = document.createElement('button')
+    startButton.className = 'startButton';
+    startButton.innerText = 'PLAY GAME'
+    startButton.onclick = this.startTimer;
+    this.timerScreen.appendChild(startButton);
+    return this.timerScreen;
+  }
+
+  startTimer(){
+    let time = 30;
+    let clock = setInterval(function(){
+      document.getElementById('timer').innerHTML='00:'+ time;
+      time--;
+      if (time < 0) {
+        clearInterval(clock);
+      }
+    }, 1000);
+    this.game.startGame();
   }
 
   setUpProgress(){
     this.progressScreen = document.createElement('div');
-    this.progressScreen.className = 'progressScreen';
+    this.progressScreen.className = 'screen';
     this.progressScreen.innerText = "Progress";
     this.progress = document.createElement('div');
-    this.progress.className = "progress";
+    this.progress.className = "tracker";
     this.progressScreen.appendChild(this.progress);
     for(let i = 1; i < 8; i++){
       let bar = document.createElement('div')
@@ -52,15 +81,16 @@ class Gameplay {
 
   setUpHealth(){
     this.healthScreen = document.createElement('div');
-    this.healthScreen.className = 'healthScreen';
-    this.healthScreen.innerText = "Patient Health";
+    this.healthScreen.className = 'screen';
+    this.healthScreen.innerText = "Patient Condition";
     this.health = document.createElement('div');
-    this.health.className = "health";
+    this.health.className = "tracker";
     this.healthScreen.appendChild(this.health);
     for(let i = 1; i < 8; i++){
-      let bar = document.createElement('div')
-      bar.id = `bar${i}`;
-      this.health.appendChild(bar);
+      let life = document.createElement('div')
+      life.id = `life${i}`;
+      life.style.backgroundColor = "lawngreen";
+      this.health.appendChild(life);
     }
     return this.healthScreen;
   }
@@ -68,6 +98,11 @@ class Gameplay {
   incrementProgress(){
     let currBar = document.getElementById(`bar${this.organsPlaced}`);
     currBar.style.backgroundColor = "lawngreen";
+    // if(this.lives < 7){
+    //   this.lives += 1;
+    //   let currLife = document.getElementById(`life${this.lives}`);
+    //   currLife.style.backgroundColor = "lawngreen";
+    // }
   }
 
   correctPlace(organ){
@@ -78,6 +113,11 @@ class Gameplay {
         this.organsPlaced += 1;
         this.incrementProgress();
         return true;
+      }
+      else {
+        let currLife = document.getElementById(`life${this.lives}`);
+        currLife.style.backgroundColor = "black";
+        this.lives -= 1;
       }
       return false;
   }

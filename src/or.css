@@ -60,16 +60,16 @@ body {
 
 .open-modal {
   visibility: visible;
-  z-index: 12;
-  width: 250px;
+  z-index: 60;
+  width: 275px;
   position: absolute;
-  top: 75;
+  align-self: center;
   background-color: black;
   color: lawngreen;
-  font-size: 18px;
+  font-size: 20px;
   text-align: center;
-  padding: 15px;
-  border: 1px solid lawngreen;
+  padding: 25px;
+  border: 3px solid lawngreen;
 }
 
 .close-modal {
@@ -84,7 +84,7 @@ body {
   justify-content: space-evenly;
 }
 
-.progressScreen {
+.screen {
   z-index: 12;
   background-color: black;
   height: 60px;
@@ -93,21 +93,19 @@ body {
   text-align: center;
   padding: 30px;
   font-size: 24px;
-  border: 15px solid whitesmoke;
+  border: 15px solid slategrey;
 }
 
-
-.healthScreen {
-  z-index: 12;
-  position: relative;
-  background-color: black;
-  height: 60px;
-  width: 205px;
-  color: lawngreen;
-  text-align: center;
-  padding: 30px;
+.startButton {
   font-size: 24px;
-  border: 15px solid whitesmoke;
+  font-weight: bold;
+  outline: none;
+}
+
+.startButton:hover {
+  color: lawngreen;
+  background-color: black;
+  outline: 2px solid white;
 }
 
 .instructions {
@@ -136,7 +134,7 @@ body {
   text-align: left;
 }
 
-.progress {
+.tracker {
   outline: 1px solid lawngreen;
   z-index: 14;
   height: 15px;
@@ -147,17 +145,17 @@ body {
   flex-direction: row;
 }
 
-.progress div {
+.tracker div {
   height: 100%;
   width: 14.28%;
 }
 
 .gameover {
   visibility: visible;
-  z-index: 12;
+  z-index: 99;
   width: 250px;
   position: absolute;
-  top: 75;
+  align-self: center;
   background-color: black;
   color: white;
   font-size: 18px;

@@ -45,10 +45,6 @@ class SetUp {
     title.className = 'title'
     title.innerText = 'Play Operation!'
     instructions.appendChild(title)
-    // const catchphrase = document.createElement('div');
-    // catchphrase.className = 'catchphrase'
-    // catchphrase.innerText = '(a game of life or death)'
-    // instructions.appendChild(catchphrase)
     const rules = document.createElement('ul');
     rules.className = 'rules'
     const rule1 = document.createElement('li')
