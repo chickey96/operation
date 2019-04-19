@@ -1,20 +1,27 @@
 .operating-room{
-  background-image: url('../assets/images/OR.jpg');
-  width: 100%;
+  /* background-image: url('../assets/images/iv2.jpeg'); */
+  background-color: aqua;
+  padding: 25px 75px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   height: 100%;
-  background-size: contain;
-  position: absolute;
-  top: 0;
-  left: 0; 
+  /* background-repeat: no-repeat; */
+  /* background-size: contain; */
+  /* background-blend-mode: hard-light; */
 }
 
 body {
   display: flex;
-  flex-direction: row;
+  flex-direction: column-reverse;
   justify-content: center;
-  align-items: center;
-  width: 100%;
+  align-content: space-between;
   margin: 0;
+}
+
+.surgicalSite {
+  display: flex;
+  flex-direction: row;
 }
 
 .table{
@@ -23,8 +30,9 @@ body {
   background-color: steelblue;
   border: 1px solid black;
   display: flex;
-  position: relative;
   z-index: 1;
+  margin-left: 185px;
+  margin-top: 24px;
 }
 
 .instruments{
@@ -33,13 +41,13 @@ body {
   background-color: slategray;
   border: 1px solid black;
   display: flex;
-  position: relative;
   z-index: 1;
+  margin-top: 24px;
 }
 
 #canvas {
   position: absolute;
-  z-index: 10;
+  z-index: 50;
 }
 
 .hover { 
@@ -69,21 +77,66 @@ body {
   position: absolute;
 }
 
-.screen {
+.score {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-top: 24px;
+  justify-content: space-evenly;
+}
+
+.progressScreen {
   z-index: 12;
-  position: fixed;
   background-color: black;
   height: 60px;
   width: 205px;
-  left: 25px;
-  top: 25px;
   color: lawngreen;
   text-align: center;
   padding: 30px;
   font-size: 24px;
+  border: 15px solid whitesmoke;
 }
 
-.health {
+
+.healthScreen {
+  z-index: 12;
+  position: relative;
+  background-color: black;
+  height: 60px;
+  width: 205px;
+  color: lawngreen;
+  text-align: center;
+  padding: 30px;
+  font-size: 24px;
+  border: 15px solid whitesmoke;
+}
+
+.instructions {
+  z-index: 12;
+  background-color: black;
+  color: lawngreen;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+}
+
+.catchphrase {
+}
+
+.rules {
+  margin: 0;
+}
+.rules li {
+  margin: 5px 0;
+  text-align: left;
+}
+
+.progress {
   outline: 1px solid lawngreen;
   z-index: 14;
   height: 15px;
@@ -94,7 +147,7 @@ body {
   flex-direction: row;
 }
 
-.health div {
+.progress div {
   height: 100%;
   width: 14.28%;
 }

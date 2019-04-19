@@ -15,11 +15,11 @@ class SetUp {
     this.organs = [];
     this.addOrgans();
     this.drawOrgans();
+    this.displayRules();
     let body = new Body(context);
     body.draw();
     this.game = new Game(this.organs, this.context, body);
     this.game.play();
-    this.repaint = this.repaint.bind(this)
   }
 
   addOrgans(){
@@ -38,13 +38,39 @@ class SetUp {
    })
   }
 
-  repaint(){
-    let canvas = document.getElementById('canvas')
-    this.context.clearRect(0, 0, canvas.width , canvas.height );
-    this.addOrgans();
-    this.drawOrgans();
-    new Body().draw();
+  displayRules() {
+    const instructions = document.createElement('div');
+    instructions.className = 'instructions';
+    const title = document.createElement('div');
+    title.className = 'title'
+    title.innerText = 'Play Operation!'
+    instructions.appendChild(title)
+    // const catchphrase = document.createElement('div');
+    // catchphrase.className = 'catchphrase'
+    // catchphrase.innerText = '(a game of life or death)'
+    // instructions.appendChild(catchphrase)
+    const rules = document.createElement('ul');
+    rules.className = 'rules'
+    const rule1 = document.createElement('li')
+    rule1.innerText = 'Drag organs to their correct location in the body cavity'
+    rules.appendChild(rule1);
+    const rule2 = document.createElement('li')
+    rule2.innerText = "Improperly placed organs damage the patient\'s health"
+    rules.appendChild(rule2);
+    const rule3 = document.createElement('li')
+    rule3.innerText = 'Implant all organs before the timer runs out or the patient reaches critical condition'
+    rules.appendChild(rule3);
+    instructions.appendChild(rules)  
+    document.body.appendChild(instructions)
   }
+
+  // repaint(){
+  //   let canvas = document.getElementById('canvas')
+  //   this.context.clearRect(0, 0, canvas.width , canvas.height );
+  //   this.addOrgans();
+  //   this.drawOrgans();
+  //   new Body().draw();
+  // }
     
 }
  export default SetUp;

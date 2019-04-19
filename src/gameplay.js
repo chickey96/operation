@@ -23,28 +23,49 @@ class Gameplay {
     this.situateOrgan = this.situateOrgan.bind(this);
     this.correctPlace = this.correctPlace.bind(this);
     this.isPositioned = this.isPositioned.bind(this);
+    this.setUpProgress = this.setUpProgress.bind(this);
     this.setUpHealth = this.setUpHealth.bind(this);
-    this.incrementHealth = this.incrementHealth.bind(this);
+    this.incrementProgress = this.incrementProgress.bind(this);
     this.organsPlaced = 0;
-    this.setUpHealth();
+    const OR = document.getElementsByClassName('operating-room')[0];
+    const score = document.createElement('div');
+    score.className = 'score';
+    score.appendChild(this.setUpProgress());
+    score.appendChild(this.setUpHealth());
+    OR.append(score);
+  }
+
+  setUpProgress(){
+    this.progressScreen = document.createElement('div');
+    this.progressScreen.className = 'progressScreen';
+    this.progressScreen.innerText = "Progress";
+    this.progress = document.createElement('div');
+    this.progress.className = "progress";
+    this.progressScreen.appendChild(this.progress);
+    for(let i = 1; i < 8; i++){
+      let bar = document.createElement('div')
+      bar.id = `bar${i}`;
+      this.progress.appendChild(bar);
+    }
+    return this.progressScreen;
   }
 
   setUpHealth(){
-    this.screen = document.createElement('div');
-    this.screen.className = 'screen';
-    this.screen.innerText = "HEALTH";
+    this.healthScreen = document.createElement('div');
+    this.healthScreen.className = 'healthScreen';
+    this.healthScreen.innerText = "Patient Health";
     this.health = document.createElement('div');
     this.health.className = "health";
-    this.screen.appendChild(this.health);
-    document.body.appendChild(this.screen);
+    this.healthScreen.appendChild(this.health);
     for(let i = 1; i < 8; i++){
       let bar = document.createElement('div')
       bar.id = `bar${i}`;
       this.health.appendChild(bar);
     }
+    return this.healthScreen;
   }
 
-  incrementHealth(){
+  incrementProgress(){
     let currBar = document.getElementById(`bar${this.organsPlaced}`);
     currBar.style.backgroundColor = "lawngreen";
   }
@@ -55,7 +76,7 @@ class Gameplay {
         this.situateOrgan(organ, organName);
         organ.lock();
         this.organsPlaced += 1;
-        this.incrementHealth();
+        this.incrementProgress();
         return true;
       }
       return false;

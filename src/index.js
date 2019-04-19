@@ -1,6 +1,6 @@
 
-import table from './table';
-import instruments from './instruments';
+import tableGen from './table';
+import getInstruments from './instruments';
 import SetUp from './setup';
 
 function component() {
@@ -9,12 +9,21 @@ function component() {
   return element;
 }
 
-document.body.appendChild(component());
+const OR = component();
+document.body.appendChild(OR);
+const surgicalSite = document.createElement('div')
+surgicalSite.className = 'surgicalSite';
+surgicalSite.appendChild(tableGen());
+surgicalSite.appendChild(getInstruments());
+OR.appendChild(surgicalSite);
+
 
 document.addEventListener("DOMContentLoaded", () => {
-  var canvas = document.getElementById("canvas");
+  var canvas = document.createElement('canvas')
+  canvas.id = 'canvas'
   canvas.width = 900;
   canvas.height = 600;
+  surgicalSite.appendChild(canvas);
   var context = canvas.getContext("2d");
   new SetUp(context);
 });

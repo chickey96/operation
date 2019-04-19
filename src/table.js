@@ -1,10 +1,9 @@
-// const bodyCavity = require('./body-cavity');
 
-function tableGen () {
+export default function tableGen () {
   let table = document.createElement('div');
   table.className = 'table';
   table.backgroundImage = '../assets/images/body.png';
   return table;
 }
 
-document.body.appendChild(tableGen());
+// document.body.appendChild(tableGen());
