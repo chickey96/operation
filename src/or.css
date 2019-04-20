@@ -41,7 +41,7 @@ body {
 
 .instruments{
   width: 250px;
-  height: 562px;
+  height: 563px;
   background-color: rgb(221, 234, 247);
   display: flex;
   z-index: 1;
