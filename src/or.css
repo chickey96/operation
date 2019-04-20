@@ -25,31 +25,31 @@ body {
 }
 
 .table{
-  width: 270px;
-  height: 550px;
-  background-color: rgb(84, 169, 239);
+  width: 250px;
+  height: 575px;
+  background-color: rgb(221, 234, 247);
   display: flex;
   z-index: 1;
+  padding-right: 15px;
   margin-left: 179px;
-  margin-top: 15px;
-  border-top: 10px solid slategray;
-  border-left: 10px solid slategray;
-  border-bottom: 10px solid slategray;
-  border-right: 5px solid slategray;
+  margin-top: 10px;
+  border-top: 4px groove rgb(193, 201, 209);
+  border-left: 4px groove rgb(193, 201, 209);
+  border-bottom: 4px ridge rgb(193, 201, 209); 
+  border-right: 4px ridge rgb(193, 201, 209);
 }
 
 .instruments{
   width: 250px;
-  height: 550px;
-  background-color: rgb(193, 201, 209);
-  border: 1px solid black;
+  height: 562px;
+  background-color: rgb(221, 234, 247);
   display: flex;
   z-index: 1;
-  margin-top: 15px;
-  border-top: 10px solid slategray;
-  border-right: 10px solid slategray;
-  border-bottom: 10px solid slategray;
-  border-left: 5px solid slategray;
+  margin-top: 10px;
+  border-top: 10px ridge rgb(193, 201, 209);
+  border-right: 10px groove rgb(193, 201, 209);
+  border-bottom: 10px groove rgb(193, 201, 209);
+  border-left: 10px inset rgb(193, 201, 209);
 }
 
 #canvas {
@@ -101,13 +101,17 @@ body {
   text-align: center;
   padding: 30px;
   font-size: 24px;
-  border: 15px solid slategrey;
+  border-left: 20px ridge rgb(193, 201, 209);
+  border-bottom: 20px ridge rgb(193, 201, 209);
+  border-top: 20px groove rgb(193, 201, 209);
+  border-right: 20px groove rgb(193, 201, 209);
 }
 
 .startButton {
   font-size: 24px;
   font-weight: bold;
   outline: none;
+  z-index: 100;
 }
 
 .startButton:hover {
@@ -179,9 +183,9 @@ body {
 }
 
 #game-lost div {
-  color: lawngreen;
-  background-color: black;
-  border: 2px solid lawngreen;
+  color: black;
+  background-color: white;
+  border: 2px solid black;
   padding: 5px;
 }
 
@@ -196,7 +200,6 @@ body {
 
 #game-lost {
   background-image: url('../assets/images/lost.png');
-  color: lawngreen;
   background-size: cover;
   background-position: 50% 50%;
   justify-content: center;
@@ -221,11 +224,9 @@ body {
 }
 
 .modal-background {
-  /* height: 100%;
-  width: 100%; */
   visibility: visible;
-  background-color: rgb(0, 0, 0, .6);
-  position: absolute;
+  background-color: rgb(0, 0, 0, 1);
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;

@@ -22,6 +22,8 @@ class Game{
     this.mouseDown = this.mouseDown.bind(this);
     this.startGame = this.startGame.bind(this);
     this.endGame = this.endGame.bind(this);
+    this.handleCanvasClick = this.handleCanvasClick.bind(this);
+    this.drawBorder = this.drawBorder.bind(this);
 
     this.playGame = new Gameplay(this);
     this.modal = document.createElement('span');
@@ -36,7 +38,15 @@ class Game{
     document.body.appendChild(this.modalBackground);
 
     this.canvas = document.getElementById('canvas');
+    this.canvas.addEventListener('click', this.handleCanvasClick);
+    
   } 
+
+  handleCanvasClick(){
+    this.playGame.startTimer();
+    this.canvas.removeEventListener('click', this.handleCanvasClick)
+
+  }
 
   startGame(){
     this.canvas.addEventListener('mousedown', this.mouseDown);
@@ -67,8 +77,32 @@ class Game{
       this.repaint()
       window.setTimeout(this.feedback(this.selection), 1000);
       this.selection = null;
+    } else {
+      this.drawBorder();
     }
   }
+
+  drawBorder() {
+
+    const dArr = [-1,-1, 0,-1, 1,-1, -1,0, 1,0, -1,1, 0,1, 1,1] // offset array
+        const s = 2  // thickness scale
+        const x = 200  // final position
+        const y = 10
+   
+    // draw images at offsets from the array scaled by s
+    for(let i = 0; i < dArr.length; i += 2)
+      this.ctx.drawImage(this.body.body, x + dArr[i]*s, y + dArr[i+1]*s, 240, 575);
+      this.ctx.globalCompositeOperation = "source-in";
+      this.ctx.fillStyle = "red";
+      this.ctx.fillRect(0,0, this.canvas.width, this.canvas.height);
+    
+      this.ctx.globalCompositeOperation = "source-over";
+      this.body.draw();
+      this.organs.forEach( organ => {
+        organ.draw();
+      })
+  }
+  
 
   mouseMove(e) {
     let mouseX = e.layerX;
@@ -128,6 +162,7 @@ class Game{
     if(this.playGame.lives === 0){
       this.endGame();
       this.gameLostMessage();
+      return;
     }
     for (let i = 0; i < this.organs.length; i++) {
       if(!this.organs[i].placed){
