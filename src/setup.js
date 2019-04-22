@@ -48,13 +48,13 @@ class SetUp {
     const rules = document.createElement('ul');
     rules.className = 'rules'
     const rule1 = document.createElement('li')
-    rule1.innerText = 'Drag organs to their correct location in the body cavity'
+    rule1.innerText = 'Drag organs into the body cavity'
     rules.appendChild(rule1);
     const rule2 = document.createElement('li')
-    rule2.innerText = "Improperly placed organs damage the patient\'s health"
+    rule2.innerText = "Misplaced organs damage the patient\'s health"
     rules.appendChild(rule2);
     const rule3 = document.createElement('li')
-    rule3.innerText = 'Implant all organs before the timer runs out or the patient reaches critical condition'
+    rule3.innerText = 'Finish implanting before time runs out or the patient reaches critical condition!'
     rules.appendChild(rule3);
     instructions.appendChild(rules)  
     document.body.appendChild(instructions)
