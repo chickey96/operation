@@ -42,12 +42,13 @@ class Game{
     
   } 
 
+  // allow players to start the game by directly clicking on the canvas
   handleCanvasClick(){
     this.playGame.startTimer();
     this.canvas.removeEventListener('click', this.handleCanvasClick)
-
   }
 
+  // add click and drag functionality
   startGame(){
     this.canvas.addEventListener('mousedown', this.mouseDown);
     this.canvas.addEventListener('mousemove', this.mouseMove);
@@ -57,11 +58,13 @@ class Game{
   mouseDown(e) {
     let mouseX = e.layerX;
     let mouseY = e.layerY;
+    // check to see if the player clicked on an organ
     for (let i = 0; i < this.organs.length; i++) {
       let organ = this.organs[i];
-      if (organ.placed) continue;
+      if (organ.placed) continue; // already placed organs aren't draggable
       if (mouseX >= organ.x && mouseX <= (organ.x + organ.width)
         && mouseY >= organ.y && mouseY <= (organ.y + organ.height)) {
+        // if an organ was clicked, track it and make it draggable
         this.selection = organ;
         this.dragging = true;
         this.offsetX = mouseX - organ.x;
@@ -73,55 +76,31 @@ class Game{
 
   mouseUp(e) {
     this.dragging = false;
+    // if an organ was correctly placed redraw the canvas and display modal
     if (this.playGame.correctPlace(this.selection)) {
       this.repaint()
       window.setTimeout(this.feedback(this.selection), 1000);
       this.selection = null;
     } else {
+      // outline the body in red if the organ was misplaced
       this.drawBorder();
     }
   }
-
-  drawBorder() {
-
-    const dArr = [-1,-1, 0,-1, 1,-1, -1,0, 1,0, -1,1, 0,1, 1,1] // offset array
-        const s = 2  // thickness scale
-        const x = 200  // final position
-        const y = 10
-   
-    // draw images at offsets from the array scaled by s
-    for(let i = 0; i < dArr.length; i += 2)
-      this.ctx.drawImage(this.body.body, x + dArr[i]*s, y + dArr[i+1]*s, 240, 575);
-      this.ctx.globalCompositeOperation = "source-in";
-      this.ctx.fillStyle = "red";
-      this.ctx.fillRect(0,0, this.canvas.width, this.canvas.height);
-    
-      this.ctx.globalCompositeOperation = "source-over";
-      this.body.draw();
-      this.organs.forEach( organ => {
-        organ.draw();
-      })
-  }
-  
 
   mouseMove(e) {
     let mouseX = e.layerX;
     let mouseY = e.layerY;
     if (this.dragging) {
+      // track an organ's position if it's being dragged
       this.changeInX = mouseX - this.selection.x - this.offsetX;
       this.changeInY = mouseY - this.selection.y - this.offsetY;
       this.selection.setX(this.selection.x + this.changeInX);
       this.selection.setY(this.selection.y + this.changeInY);
-  
-      requestAnimationFrame(() => {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.body.draw();
-        this.organs.forEach(organ => {
-          organ.draw();
-        })
-      })
+      // redraw the canvas to display the moving organ
+      this.repaint();
     }
     else {
+      // only display a hover cursor over draggable objects
       let hover = false;
       for (let i = 0; i < this.organs.length; i++) {
         let organ = this.organs[i];
@@ -129,7 +108,7 @@ class Game{
           continue;
         }
         if (mouseX >= organ.x && mouseX <= (organ.x + organ.width)
-          && mouseY >= organ.y && mouseY <= (organ.y + organ.height)) {
+        && mouseY >= organ.y && mouseY <= (organ.y + organ.height)) {
           this.canvas.className = "hover"
           hover = true;
           break;
@@ -140,7 +119,34 @@ class Game{
       }
     }
   } 
+  
+  drawBorder() {
+    //draw the body image offset by one in every direction for x and y coordinates
+    // see https://stackoverflow.com/questions/28207232/draw-border-around-nontransparent-part-of-image-on-canvas
+    const offsetCoords = [ -1,-1, 0,-1, 1,-1, -1,0, 1,0, -1,1, 0,1, 1,1] 
+        const s = 2  // thickness scale
+        const x = 200  // original x and y positions
+        const y = 10  
+        const w = 240  // original width and height
+        const h = 575
+   
+    // draw images at each offset for an enlargened version of original
+    for(let i = 0; i < offsetCoords.length; i += 2){
+      this.ctx.drawImage(this.body.body, x + offsetCoords[i]*s, y + offsetCoords[i+1]*s, w, h);
+    }
+      this.ctx.globalCompositeOperation = "source-in";
+      this.ctx.fillStyle = "red";
+      this.ctx.fillRect(0,0, this.canvas.width, this.canvas.height);
 
+      // redraw original body outline and organs on top
+      this.ctx.globalCompositeOperation = "source-over";
+      this.body.draw();
+      this.organs.forEach( organ => {
+        organ.draw();
+      })
+  }
+
+  // remove all dynamically created elements and intitialize a new setup 
   restartGame(e){
     e.preventDefault();
     const score = document.getElementsByClassName("score");
@@ -154,28 +160,35 @@ class Game{
     new SetUp(this.ctx);
   }
 
+  //check every second to see if the player has won
   play(){
     this.intervalID = window.setInterval(this.won, 1000);
   }
 
   won() {
+    // player loses if patient's health bar is empty
     if(this.playGame.lives === 0){
       this.endGame();
       this.gameLostMessage();
       return;
     }
+    // check to see if any organs aren't placed
     for (let i = 0; i < this.organs.length; i++) {
       if(!this.organs[i].placed){
         return false;
       }
     }
+    // player wins if all of the organs are placed correctly
     this.endGame();
     this.gameWonMessage();
   }
 
   endGame(){
+    // stop continuously checking to see if player has won
     window.clearInterval(this.intervalID);
+    // stop the timer
     window.clearInterval(this.playGame.clock)
+    // remove click and drag functionality
     this.canvas.removeEventListener('mousedown', this.mouseDown);
     this.canvas.removeEventListener('mousemove', this.mouseMove);
     this.canvas.removeEventListener('mouseup', this.mouseUp);
@@ -186,6 +199,7 @@ class Game{
     this.openModal(organName);
   }
 
+  // briefly show modal if organ is correctly placed
   openModal(organName){
     this.modal.innerText = `You got the ${organName}!`
     this.modal.className = "open-modal";

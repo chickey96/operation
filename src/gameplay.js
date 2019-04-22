@@ -58,7 +58,7 @@ class Gameplay {
     this.clock = setInterval(() => {
       document.getElementById('timer').innerHTML='00:'+ time;
       time--;
-      if (time < 0) {
+      if (time < 0) { // if timer runs out, player loses
         clearInterval(that.clock);
         that.game.endGame();
         that.game.gameLostMessage();
@@ -113,6 +113,7 @@ class Gameplay {
         return true;
       }
       else {
+        // decrement patient's health if an organ is misplaced
         let currLife = document.getElementById(`life${this.lives}`);
         currLife.style.backgroundColor = "black";
         this.lives -= 1;
@@ -120,6 +121,7 @@ class Gameplay {
       return false;
   }
 
+  // reposition organ to exact location if the player put it within range
   situateOrgan(organ, organName){
     let goal = this.bingo[organName];
     organ.setX(goal[0]);
