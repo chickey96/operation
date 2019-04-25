@@ -3,7 +3,7 @@ const Organ = require('./organ');
 export default class Stomach extends Organ {
  
   constructor(context) {
-    let imgUrl = "https://upload.wikimedia.org/wikipedia/commons/b/be/Stomach_icon.svg"
+    let imgUrl = '../assets/images/Stomach_icon.svg'
     let organSpecs = { ctx: context, imgUrl: imgUrl, x: 615, y: 400, w: 45, h: 55 }
     super(organSpecs)
     if (!this.x) {

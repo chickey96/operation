@@ -11,7 +11,7 @@ class Game{
     this.ctx = ctx;
     this.body = body;
     this.offsetX = 0;
-    this.offsetY = 0;
+    this.offsetY = 0; 
 
     this.gameWonMessage = this.gameWonMessage.bind(this);
     this.gameLostMessage = this.gameLostMessage.bind(this);
@@ -24,6 +24,8 @@ class Game{
     this.endGame = this.endGame.bind(this);
     this.handleCanvasClick = this.handleCanvasClick.bind(this);
     this.drawBorder = this.drawBorder.bind(this);
+    this.play = this.play.bind(this);
+    this.repaint = this.repaint.bind(this);
 
     this.playGame = new Gameplay(this);
     this.modal = document.createElement('span');
@@ -76,14 +78,16 @@ class Game{
 
   mouseUp(e) {
     this.dragging = false;
+    // console.log(this.selection.x, this.selection.y);
     // if an organ was correctly placed redraw the canvas and display modal
     if (this.playGame.correctPlace(this.selection)) {
-      this.repaint()
-      window.setTimeout(this.feedback(this.selection), 1000);
+      this.repaint();
+      this.feedback(this.selection);
       this.selection = null;
     } else {
       // outline the body in red if the organ was misplaced
       this.drawBorder();
+      window.setTimeout(this.repaint, 300);
     }
   }
 
@@ -170,7 +174,7 @@ class Game{
     if(this.playGame.lives === 0){
       this.endGame();
       this.gameLostMessage();
-      return;
+      return false;
     }
     // check to see if any organs aren't placed
     for (let i = 0; i < this.organs.length; i++) {

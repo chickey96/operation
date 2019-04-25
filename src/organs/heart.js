@@ -3,7 +3,7 @@ import Organ from './organ';
 export default class Heart extends Organ {
 
   constructor(context){
-    let imgUrl = "https://openclipart.org/download/291180/Realistic-Red-Heart.svg" 
+    let imgUrl = '../assets/images/heart.png'
     let organSpecs = {ctx: context, imgUrl: imgUrl, x: 500, y: 300, w: 40, h: 50 }
     super(organSpecs)
     if(!this.x){

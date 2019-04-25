@@ -27,7 +27,7 @@ class SetUp {
     this.organs.push(new Stomach(this.context));
     this.organs.push(new SmallIntestine(this.context));
     this.organs.push(new Colon(this.context));
-    this.organs.push(new Liver(this.context));
+    // this.organs.push(new Liver(this.context));
     this.organs.push(new Lungs(this.context));
     this.organs.push(new Heart(this.context));
   }

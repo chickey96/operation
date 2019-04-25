@@ -8,7 +8,7 @@ class Gameplay {
       "SmallIntestine": { x: [275, 295], y: [197, 220] }, 
       "Colon": { x: [280, 300], y: [225, 245] }, 
       "Liver": { x: [275, 295], y: [175, 195] }, 
-      "Lungs": { x: [275, 290], y: [110, 125] }, 
+      "Lungs": { x: [245, 258], y: [100, 110] }, 
       "Heart": { x: [295, 315], y: [130, 145] }
     }
 
@@ -18,7 +18,7 @@ class Gameplay {
       "SmallIntestine": [286, 214],
       "Colon": [292, 226],
       "Liver": [285, 176],
-      "Lungs": [284, 108],
+      "Lungs": [254, 106],
       "Heart": [307, 129]
     }
     this.situateOrgan = this.situateOrgan.bind(this);
