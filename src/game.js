@@ -79,7 +79,6 @@ class Game{
 
   mouseUp(e) {
     this.dragging = false;
-    console.log(this.selection.x, this.selection.y);
     // if an organ was correctly placed redraw the canvas and display modal
     if (this.playGame.correctPlace(this.selection)) {
       this.repaint();
