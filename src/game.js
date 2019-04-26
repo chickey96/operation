@@ -41,6 +41,7 @@ class Game{
 
     this.canvas = document.getElementById('canvas');
     this.canvas.addEventListener('click', this.handleCanvasClick);
+    this.canvas.className = 'hover';
     
   } 
 
@@ -78,7 +79,7 @@ class Game{
 
   mouseUp(e) {
     this.dragging = false;
-    // console.log(this.selection.x, this.selection.y);
+    console.log(this.selection.x, this.selection.y);
     // if an organ was correctly placed redraw the canvas and display modal
     if (this.playGame.correctPlace(this.selection)) {
       this.repaint();
@@ -161,6 +162,7 @@ class Game{
     document.body.removeChild(this.gameover);
     document.body.removeChild(this.modal);
     document.body.removeChild(this.modalBackground);
+    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
     new SetUp(this.ctx);
   }
 

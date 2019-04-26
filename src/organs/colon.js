@@ -3,17 +3,17 @@ const Organ = require('./organ');
 export default class Colon extends Organ {
   constructor(context) {
     let imgUrl = '../assets/images/colon.png'
-    let organSpecs = { ctx: context, imgUrl: imgUrl, x: 600, y: 100, w: 60, h: 70 }
+    let organSpecs = { ctx: context, imgUrl: imgUrl, x: 500, y: 470, w: 67, h: 77 }
     super(organSpecs)
     if (!this.x) {
-      this.x = 600;
+      this.x = 500;
     }
     if (!this.y) {
-      this.y = 100;
+      this.y = 470;
     }
     this.ctx = context;
-    this.width = 60;
-    this.height = 70;
+    this.width = 67;
+    this.height = 77;
   }
 
   draw() {

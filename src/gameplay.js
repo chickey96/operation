@@ -3,23 +3,23 @@ class Gameplay {
   constructor(game){
     this.game = game;
     this.closeEnough = {
-      "Kidneys": { x: [270, 285], y: [190, 210] }, 
-      "Stomach": { x: [301, 321], y: [170, 190] }, 
-      "SmallIntestine": { x: [275, 295], y: [197, 220] }, 
-      "Colon": { x: [280, 300], y: [225, 245] }, 
-      "Liver": { x: [275, 295], y: [175, 195] }, 
-      "Lungs": { x: [245, 258], y: [100, 110] }, 
-      "Heart": { x: [295, 315], y: [130, 145] }
+      "Kidneys": { x: [267, 280], y: [181, 199] }, 
+      "Stomach": { x: [297, 320], y: [165, 190] }, 
+      "SmallIntestine": { x: [268, 289], y: [193, 216] }, 
+      "Colon": { x: [281, 296], y: [210, 233] }, 
+      "Liver": { x: [269, 284], y: [158, 175] }, 
+      "Lungs": { x: [255, 265], y: [102, 125] }, 
+      "Heart": { x: [299, 312], y: [128, 149] }
     }
 
     this.bingo = {
-      "Kidneys": [273, 200],
+      "Kidneys": [273, 192],
       "Stomach": [310, 174],
-      "SmallIntestine": [286, 214],
+      "SmallIntestine": [281, 209],
       "Colon": [292, 226],
-      "Liver": [285, 176],
-      "Lungs": [254, 106],
-      "Heart": [307, 129]
+      "Liver": [276, 165],
+      "Lungs": [259, 110],
+      "Heart": [310, 133]
     }
     this.situateOrgan = this.situateOrgan.bind(this);
     this.correctPlace = this.correctPlace.bind(this);

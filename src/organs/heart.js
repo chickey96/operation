@@ -4,17 +4,17 @@ export default class Heart extends Organ {
 
   constructor(context){
     let imgUrl = '../assets/images/heart.png'
-    let organSpecs = {ctx: context, imgUrl: imgUrl, x: 500, y: 300, w: 40, h: 50 }
+    let organSpecs = {ctx: context, imgUrl: imgUrl, x: 515, y: 215, w: 30, h: 45 }
     super(organSpecs)
     if(!this.x){
-      this.x = 500;
+      this.x = 515;
     }
     if(!this.y){
-      this.y = 300;
+      this.y = 215;
     }
     this.ctx = context;
-    this.width = 40;
-    this.height = 50;
+    this.width = 30;
+    this.height = 45;
   }
   
   draw(){

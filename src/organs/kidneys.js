@@ -3,17 +3,17 @@ import Organ from './organ';
 export default class Kidneys extends Organ {
   constructor(context) {
     let imgUrl = '../assets/images/kidneys.png'
-    let organSpecs = { ctx: context, imgUrl: imgUrl, x: 475, y: 400, w: 95, h: 115 }
+    let organSpecs = { ctx: context, imgUrl: imgUrl, x: 495, y: 40, w: 95, h: 150 }
     super(organSpecs)
     if (!this.x) {
-      this.x = 475;
+      this.x = 495;
     }
     if (!this.y) {
-      this.y = 400;
+      this.y = 40;
     }
     this.ctx = context;
     this.width = 95;
-    this.height = 115;
+    this.height = 150;
   }
 
   draw() {

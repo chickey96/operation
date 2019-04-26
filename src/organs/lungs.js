@@ -4,17 +4,17 @@ export default class Lungs extends Organ {
   
   constructor(context) {
     let imgUrl = '../assets/images/lungs.png'
-    let organSpecs = { ctx: context, imgUrl: imgUrl, x: 575, y: 250, w: 135, h: 84 }
+    let organSpecs = { ctx: context, imgUrl: imgUrl, x: 575, y: 260, w: 125, h: 78 }
     super(organSpecs)
     if (!this.x) {
       this.x = 575;
     }
     if (!this.y) {
-      this.y = 250;
+      this.y = 260;
     }
     this.ctx = context;
-    this.width = 135;
-    this.height = 84;
+    this.width = 125;
+    this.height = 78;
   }
 
   draw() {
