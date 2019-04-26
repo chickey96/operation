@@ -12,6 +12,7 @@
 }
 
 body {
+  font-family: 'Rubik', sans-serif;
   display: flex;
   flex-direction: column-reverse;
   justify-content: center;
@@ -140,12 +141,16 @@ body {
 
 .rules {
   margin: 0;
+  width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
 }
 .rules li {
-  margin: 10px 20px;
+  margin: 10px;
   text-align: left;
+  font-weight: 400;
+  font-size: 14px;
 }
 
 .tracker {
