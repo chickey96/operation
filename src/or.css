@@ -108,11 +108,20 @@ body {
   border-right: 20px groove rgb(193, 201, 209);
 }
 
+#timer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
 .startButton {
   font-size: 24px;
   font-weight: bold;
   outline: none;
   z-index: 100;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 .startButton:hover {

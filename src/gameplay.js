@@ -60,8 +60,6 @@ class Gameplay {
       document.getElementById('timer').innerHTML='00:'+ that.time;
       that.time--;
       if (that.time < 0) { // if timer runs out, player loses
-        clearInterval(that.clock);
-        that.game.endGame();
         that.game.gameLostMessage();
       }
     }, 1000);
