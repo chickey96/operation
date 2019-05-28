@@ -173,7 +173,6 @@ class Game{
   won() {
     // player loses if patient's health bar is empty
     if(this.playGame.lives === 0){
-      this.endGame();
       this.gameLostMessage();
       return false;
     }
@@ -184,7 +183,6 @@ class Game{
       }
     }
     // player wins if all of the organs are placed correctly
-    this.endGame();
     this.gameWonMessage();
   }
 
@@ -216,6 +214,7 @@ class Game{
   }
 
   gameWonMessage(){
+    this.endGame();
     const msg = document.createElement('div');
     msg.innerText = "Congratulations! You Saved a life.";
     msg.className = 'msg';
@@ -231,6 +230,7 @@ class Game{
   }
 
   gameLostMessage(){
+    this.endGame();
     const msg = document.createElement('div');
     msg.innerText = "You lost the patient!";;
     msg.className = 'msg';
