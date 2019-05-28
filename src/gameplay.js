@@ -33,6 +33,7 @@ class Gameplay {
     this.lives = 7;
     const OR = document.getElementsByClassName('operating-room')[0];
     const score = document.createElement('div');
+    this.time = 45;
     score.className = 'score';
     score.appendChild(this.setUpProgress());
     score.appendChild(this.setUpHealth());
@@ -53,12 +54,12 @@ class Gameplay {
   }
 
   startTimer(){
-    let time = 45;
+    this.time = 45;
     let that = this;
     this.clock = setInterval(() => {
-      document.getElementById('timer').innerHTML='00:'+ time;
-      time--;
-      if (time < 0) { // if timer runs out, player loses
+      document.getElementById('timer').innerHTML='00:'+ that.time;
+      that.time--;
+      if (that.time < 0) { // if timer runs out, player loses
         clearInterval(that.clock);
         that.game.endGame();
         that.game.gameLostMessage();
