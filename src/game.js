@@ -171,6 +171,11 @@ class Game{
   }
 
   won() {
+    //player loses if time runs out
+    if(this.playGame.time <= 0){
+      this.gameLostMessage();
+      return false;
+    }
     // player loses if patient's health bar is empty
     if(this.playGame.lives === 0){
       this.gameLostMessage();
@@ -184,13 +189,14 @@ class Game{
     }
     // player wins if all of the organs are placed correctly
     this.gameWonMessage();
+    return true;
   }
 
   endGame(){
     // stop continuously checking to see if player has won
     window.clearInterval(this.intervalID);
     // stop the timer
-    window.clearInterval(this.playGame.clock)
+    window.clearInterval(this.playGame.clock);
     // remove click and drag functionality
     this.canvas.removeEventListener('mousedown', this.mouseDown);
     this.canvas.removeEventListener('mousemove', this.mouseMove);

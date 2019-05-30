@@ -29,6 +29,7 @@ class Gameplay {
     this.startTimer = this.startTimer.bind(this);
     this.setupTimer = this.setupTimer.bind(this);
     this.incrementProgress = this.incrementProgress.bind(this);
+    this.timer = this.timer.bind(this);
     this.organsPlaced = 0;
     this.lives = 7;
     const OR = document.getElementsByClassName('operating-room')[0];
@@ -55,15 +56,15 @@ class Gameplay {
 
   startTimer(){
     this.time = 45;
-    let that = this;
-    this.clock = setInterval(() => {
-      document.getElementById('timer').innerHTML='00:'+ that.time;
-      that.time--;
-      if (that.time < 0) { // if timer runs out, player loses
-        that.game.gameLostMessage();
-      }
-    }, 1000);
+    this.clock = setInterval(this.timer, 1000);
     this.game.startGame();
+  }
+
+  timer(){
+    document.getElementById('timer').innerHTML='00:'+ this.time;
+    if(this.time > 0){
+      this.time--;
+    }
   }
 
   setUpProgress(){

@@ -1,14 +1,10 @@
 .operating-room{
-  /* background-image: url('../assets/images/iv2.jpeg'); */
   background-color: rgb(118, 222, 245);
-  padding: 25px 75px;
+  padding: 20px 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   height: 100%;
-  /* background-repeat: no-repeat; */
-  /* background-size: contain; */
-  /* background-blend-mode: hard-light; */
 }
 
 body {
@@ -134,7 +130,7 @@ body {
   z-index: 12;
   background-color: black;
   color: lawngreen;
-  padding: 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
