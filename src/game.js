@@ -173,12 +173,12 @@ class Game{
   won() {
     //player loses if time runs out
     if(this.playGame.time <= 0){
-      this.gameLostMessage();
+      this.endGame("lost");
       return false;
     }
     // player loses if patient's health bar is empty
     if(this.playGame.lives === 0){
-      this.gameLostMessage();
+      this.endGame("lost");
       return false;
     }
     // check to see if any organs aren't placed
@@ -188,11 +188,11 @@ class Game{
       }
     }
     // player wins if all of the organs are placed correctly
-    this.gameWonMessage();
+    this.endGame("won")
     return true;
   }
 
-  endGame(){
+  endGame(status){
     // stop continuously checking to see if player has won
     window.clearInterval(this.intervalID);
     // stop the timer
@@ -201,6 +201,12 @@ class Game{
     this.canvas.removeEventListener('mousedown', this.mouseDown);
     this.canvas.removeEventListener('mousemove', this.mouseMove);
     this.canvas.removeEventListener('mouseup', this.mouseUp);
+    if(status == "lost"){
+      this.gameLostMessage();
+    }
+    if(status == "won"){
+      this.gameWonMessage();
+    }
   }
 
   feedback(organ){
@@ -220,7 +226,6 @@ class Game{
   }
 
   gameWonMessage(){
-    this.endGame();
     const msg = document.createElement('div');
     msg.innerText = "Congratulations! You Saved a life.";
     msg.className = 'msg';
@@ -236,7 +241,6 @@ class Game{
   }
 
   gameLostMessage(){
-    this.endGame();
     const msg = document.createElement('div');
     msg.innerText = "You lost the patient!";;
     msg.className = 'msg';
